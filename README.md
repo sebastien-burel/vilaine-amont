@@ -32,3 +32,9 @@ vilaine-amont/
 ```
 
 Le backend sert de proxy pour contourner les restrictions CORS de l'API EauFrance et exécute le modèle de prévision ONNX. Le frontend appelle `/api/station/:id/series` qui est relayé par Vite en dev.
+
+Le pipeline ML (collecte, préparation, entraînement, export ONNX) est documenté dans [ml/README.md](ml/README.md).
+
+## Licence
+
+Ce projet est sous licence [MIT](LICENSE).
