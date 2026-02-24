@@ -113,9 +113,9 @@ Fetch les données temps réel des 11 stations et lance l'inférence ONNX. Affic
 ### 8. Déploiement
 
 ```bash
-cp models/onnx/station_attn.onnx ../../backend/models/
-cp models/onnx/station_attn_meta.json ../../backend/models/
-cp models/onnx/norm_params.json ../../backend/models/
+cp models/onnx/station_attn.onnx ../backend/models/
+cp models/onnx/station_attn_meta.json ../backend/models/
+cp models/onnx/norm_params.json ../backend/models/
 ```
 
 ## Structure

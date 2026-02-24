@@ -1,4 +1,4 @@
-"""Configuration partagée pour le pipeline ML Vigicrue."""
+"""Configuration partagée pour le pipeline ML Vilaine Amont."""
 
 from datetime import date
 from pathlib import Path

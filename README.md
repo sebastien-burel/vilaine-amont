@@ -1,11 +1,11 @@
-# Vigicrue
+# Vilaine Amont
 
-Visualisation des hauteurs d'eau et debits des stations hydrometriques francaises, a partir des donnees ouvertes de [Hydro EauFrance](https://www.hydro.eaufrance.fr).
+Visualisation et prédiction des hauteurs d'eau et débits des 11 stations hydrométriques du bassin Vilaine Amont, à partir des données ouvertes de [Hydro EauFrance](https://www.hydro.eaufrance.fr), avec un modèle ML de prévision de crues.
 
-## Demarrage rapide
+## Démarrage rapide
 
 ```bash
-# Installer les dependances
+# Installer les dépendances
 npm -C backend install
 npm -C frontend install
 
@@ -15,19 +15,20 @@ npm run dev
 
 Le frontend est accessible sur http://localhost:5173.
 
-## Fonctionnalites
+## Fonctionnalités
 
-- Saisie d'un code station et d'une plage de dates
-- Recuperation des series Hauteur (H) et Debit (Q) via l'API Hydro EauFrance
+- Sélection parmi les 11 stations du bassin Vilaine Amont
+- Récupération des séries Hauteur (H) et Débit (Q) via l'API Hydro EauFrance
 - Graphique interactif double axe avec tooltip
-- Alignement automatique des echelles gauche (Hauteur) et droite (Debit)
+- Prévisions ML (modèle Station-Attention) avec intervalles de confiance
 
 ## Architecture
 
 ```
-vigicrue/
-  backend/          Proxy Express (port 3001) vers l'API EauFrance
+vilaine-amont/
+  backend/          Proxy Express (port 3001) + inférence ONNX
   frontend/         SPA SolidJS + uPlot (Vite, port 5173)
+  ml/               Pipeline ML (PyTorch) pour l'entraînement
 ```
 
-Le backend sert de proxy pour contourner les restrictions CORS de l'API EauFrance. Le frontend appelle `/api/station/:id/series` qui est relaye par Vite en dev.
+Le backend sert de proxy pour contourner les restrictions CORS de l'API EauFrance et exécute le modèle de prévision ONNX. Le frontend appelle `/api/station/:id/series` qui est relayé par Vite en dev.
