@@ -17,7 +17,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /opt/vilaine-amont
-            git remote set-url origin https://github.com/HaruniApp/vilaine-amont.git
+            git remote set-url origin https://github.com/sebastien-burel/vilaine-amont.git
             git fetch origin main
             git reset --hard origin/main
             npm -C backend install --production
