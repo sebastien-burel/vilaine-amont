@@ -93,7 +93,10 @@ export default function App() {
         fetch(buildUrl('Q')),
       ]);
 
-      if (!resH.ok && !resQ.ok) throw new Error(`Erreur H:${resH.status} Q:${resQ.status}`);
+      if (!resH.ok && !resQ.ok) {
+        const body = await resH.json().catch(() => null);
+        throw new Error(body?.error || `Erreur H:${resH.status} Q:${resQ.status}`);
+      }
 
       const jsonH = resH.ok ? await resH.json() : null;
       const jsonQ = resQ.ok ? await resQ.json() : null;

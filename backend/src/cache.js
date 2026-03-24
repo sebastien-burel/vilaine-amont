@@ -31,7 +31,12 @@ export async function cachedFetch(url, options, ttlMs) {
   const cached = await getCached(url);
   if (cached) return cached;
   const res = await fetch(url, options);
-  if (!res.ok) return null;
+  if (!res.ok) {
+    console.error(`Upstream ${res.status} ${res.statusText} for ${url.substring(0, 120)}`);
+    const err = new Error(`Upstream ${res.status}`);
+    err.upstreamStatus = res.status;
+    throw err;
+  }
   const data = await res.json();
   await setCache(url, data, ttlMs);
   return data;

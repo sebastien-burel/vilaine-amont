@@ -35,14 +35,14 @@ app.get('/api/station/:stationId/series', async (req, res) => {
       },
     }, TTL_30MIN);
 
-    if (!data) {
-      return res.status(502).json({ error: 'API returned an error' });
-    }
-
     res.json(data);
   } catch (err) {
     console.error('Proxy error:', err.message);
-    res.status(500).json({ error: err.message });
+    const status = err.upstreamStatus ? 502 : 500;
+    const message = err.upstreamStatus
+      ? `Hydro EauFrance indisponible (${err.upstreamStatus})`
+      : err.message;
+    res.status(status).json({ error: message });
   }
 });
 
